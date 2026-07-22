@@ -47,3 +47,13 @@ Implemented Table:
 - Diagnosis codes are intentionally excluded from the Claim Lines table.
 - A future Claim Diagnoses table and Claim Line Diagnosis Pointers mapping table will model the many-to-many relationship between diagnoses and billed procedures.
 - This design maintains normalization, supports AI explainability, and aligns with enterprise healthcare data modeling principles.
+### Medical Records
+
+#### Key Design Decisions
+
+- Medical Records store document metadata only.
+- Physical files are stored outside PostgreSQL (referenced using `storage_uri`).
+- Medical Records belong to Claims rather than individual Claim Lines.
+- `document_type` preserves the original value supplied by the source system or uploader.
+- Standardization and document categorization will be performed later by an AI classification layer.
+- The platform follows an "Extract, Load, Transform" philosophy to preserve source truth and improve interoperability across different healthcare organizations.
