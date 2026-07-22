@@ -38,3 +38,12 @@ Implemented Table:
 - Operational terminology will be handled by the application layer.
 - Composite uniqueness is enforced using (client_id, claim_control_number).
 - Business rules are enforced through CHECK constraints.
+## Claim Lines
+
+### Key Design Decisions
+
+- Claim Lines represent the primary grain for financial and clinical investigation.
+- Financial lifecycle (billed, allowed, paid) is tracked at the line level.
+- Diagnosis codes are intentionally excluded from the Claim Lines table.
+- A future Claim Diagnoses table and Claim Line Diagnosis Pointers mapping table will model the many-to-many relationship between diagnoses and billed procedures.
+- This design maintains normalization, supports AI explainability, and aligns with enterprise healthcare data modeling principles.
